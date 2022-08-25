@@ -10,10 +10,19 @@ provider:
   stage: dev
   region: us-east-1
   memorySize: 128
-
   environment:
     region: us-east-1
     cognitoUserPoolId: us-east-1_JtM0HKd9K
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "*"
 
 functions:
   app:
