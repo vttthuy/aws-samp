@@ -3,12 +3,14 @@ import { createServer, proxy } from 'aws-serverless-express';
 import * as createError from 'http-errors';
 import indexRouter from './routes';
 import usersRouter from './routes/users';
+import { checkAuth } from './check-auth';
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(checkAuth);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
